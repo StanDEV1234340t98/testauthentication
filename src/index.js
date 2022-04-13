@@ -4,11 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import * as microsoftTeams from "@microsoft/teams-js";
+import { Providers } from '@microsoft/mgt-element';
+import { TeamsProvider } from '@microsoft/mgt';
+
+TeamsProvider.microsoftTeamsLib = microsoftTeams;
+
+Providers.globalProvider = new TeamsProvider({
+  clientId: `add client id here`,
+  scopes: ['calendars.read', 'presence.read.all', 'user.read', 'openid', 'profile', 'people.read', 'user.readbasic.all'],
+  authPopupUrl: `${window.location.origin}/Auth`,
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );
 
 // If you want to start measuring performance in your app, pass a function
